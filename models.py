@@ -1,5 +1,6 @@
 import datetime
-import business_rules
+from business_rules.variables import BaseVariables, numeric_rule_variable, select_rule_variable, string_rule_variable
+from business_rules.actions import BaseActions, rule_action
 
 class ProductVariables(BaseVariables):
 

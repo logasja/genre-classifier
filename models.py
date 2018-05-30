@@ -2,19 +2,24 @@ import datetime
 from business_rules.variables import BaseVariables, numeric_rule_variable, select_rule_variable, string_rule_variable
 from business_rules.actions import BaseActions, rule_action
 
-class ProductVariables(BaseVariables):
+class SongVariables(BaseVariables):
 
-    def __init__(self, product):
-        self.product = product
+    def __init__(self, song):
+        self.song = song
 
-    @numeric_rule_variable
-    def current_inventory(self):
-        return self.product.current_inventory
+    @numeric_rule_variable(label='Numeric representation of song energy.')
+    def energy(self):
+        return self.song['energy']
 
-    @numeric_rule_variable(label='Days until expiration')
-    def expiration_days(self):
-        last_order = self.product.orders[-1]
-        return (last_order.expiration_date - datetime.date.today()).days
+    @numeric_rule_variable(label='Major key the song is in.')
+    def song_key(self):
+        return self.song['key']
+
+    @numeric_rule_variable(label='Song tempo.')
+    def tempo(self):
+        return self.song['tempo']
+
+    @numeric_rule_variable(label=)
 
     @string_rule_variable()
     def current_month(self):

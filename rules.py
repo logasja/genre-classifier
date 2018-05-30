@@ -1,4 +1,4 @@
-rules = [
+rules_json = [
 # expiration_days < 5 AND current_inventory > 20
 { "conditions": { "all": [
       { "name": "expiration_days",

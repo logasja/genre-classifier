@@ -1,46 +1,99 @@
 import datetime
-from business_rules.variables import BaseVariables, numeric_rule_variable, select_rule_variable, string_rule_variable
+from business_rules.variables import *
 from business_rules.actions import BaseActions, rule_action
+from business_rules.fields import *
+
+descriptors = ['sharp', 'smooth', 'rough', 'round', 'chaotic', 
+                'patriotic', 'steady', 'hard', 'soft', 'simple',
+                'complex', 'hurried', 'leisurly', 'slow', 'anarchist',
+                'edgy', 'grounded', 'natural', 'grungy', 'upbeat', 'acoustical',
+                'homey', 'peppy', 'melodic', 'twangy', 'repetitive', 'bassheavy']
+
+emotions = ['amazed', 'angry', 'annoyed', 'anxious', 'ashamed', 'bitter',
+            'bored', 'comfortable', 'confused', 'content', 'depressed', 'determined',
+            'disdain', 'disgusted', 'eager', 'embarrassed', 'energetic', 'envious',
+            'excited', 'foolish', 'frustrated', 'furious', 'grieving', 'happy', 'hopeful',
+            'hurt', 'inadequate', 'insecure', 'inspired', 'irritated', 'jealous', 'joy', 'lonely',
+            'lost', 'loving', 'miserable', 'motivated', 'nervous', 'overwhelmed', 'peaceful', 'proud',
+            'relieved', 'resentful', 'sad', 'satisfied', 'scared', 'self-conscious', 'shocked', 'silly',
+            'stupid', 'suspicious', 'tense', 'terrified', 'trapped', 'uncomfortable', 'worried', 'worthless']
+
+instruments = ['piano', 'lead guitar', 'bass', 'melody guitar', 'saxophone',
+               'drums', 'sythesizer', 'vocals', 'steel guitar', 'fiddle']
 
 class SongVariables(BaseVariables):
 
     def __init__(self, song):
         self.song = song
 
-    @numeric_rule_variable(label='Numeric representation of song energy.')
-    def energy(self):
-        return self.song['energy']
+    # Input information
+    @select_multiple_rule_variable(options=descriptors, label='Descriptors')
+    def descriptor(self):
+        return self.song['descriptors']
 
-    @numeric_rule_variable(label='Major key the song is in.')
-    def song_key(self):
-        return self.song['key']
+    @select_multiple_rule_variable(options=emotions, label='Emotions')
+    def emotion(self):
+        return self.song['emotions']
 
-    @numeric_rule_variable(label='Song tempo.')
+    @select_multiple_rule_variable(options=instruments, label='Instruments')
+    def instruments(self):
+        return self.song['instruments']
+
+    @boolean_rule_variable(label='Distortion')
+    def distorted(self):
+        return self.song['distortion']
+
+    @numeric_rule_variable(label='Number of Performers')
+    def performer_count(self):
+        return self.song['performers']
+
+    # Calculated features
+
+    @select_rule_variable(options=['slow', 'medium', 'fast'], label='Approximate Tempo')
     def tempo(self):
         return self.song['tempo']
 
-    @numeric_rule_variable(label=)
+    @boolean_rule_variable(label='Energetic')
+    def energetic(self):
+        return self.song['energetic']
 
-    @string_rule_variable()
-    def current_month(self):
-        return datetime.datetime.now().strftime("%B")
+    
 
-    @select_rule_variable(options=Products.top_holiday_items())
-    def goes_well_with(self):
-        return products.related_products
-
-
-class ProductActions(BaseActions):
+class SongActions(BaseActions):
 
     def __init__(self, product):
-        self.product = product
+        self.song = song
 
-    @rule_action(params={"sale_percentage": FIELD_NUMERIC})
-    def put_on_sale(self, sale_percentage):
-        self.product.price = (1.0 - sale_percentage) * self.product.price
-        self.product.save()
+    # Intermediate actions
+    @rule_action(params=[{'fieldType': FIELD_SELECT,
+                         'name' : 'tempo',
+                         'label': 'Approximate Tempo',
+                         'options': [
+                             {'label': 'Slow', 'name': 'slow'},
+                             {'label': 'Medium', 'name': 'medium'},
+                             {'label': 'Fast', 'name': 'fast'}
+                         ]}])
+    def assign_tempo(self, tempo):
+        self.song['tempo'] = tempo
 
-    @rule_action(params={"number_to_order": FIELD_NUMERIC})
-    def order_more(self, number_to_order):
-        ProductOrder.objects.create(product_id=self.product.id,
-                                    quantity=number_to_order)
+    @rule_action(params={"energetic": FIELD_NUMERIC})
+    def assign_energetic(self, energetic):
+        self.song['energetic'] = bool(energetic)
+
+    # Final action, setting rule
+    @rule_action(params=[{'fieldType'   : FIELD_SELECT,
+                          'name'        : 'genre',
+                          'label'       : 'Approximate Tempo',
+                          'options': [
+                              {'label': 'Rock', 'name': 'rock'},
+                              {'label': 'Blues', 'name': 'blues'},
+                              {'label': 'Country', 'name': 'country'},
+                              {'label': 'Reggae', 'name': 'reggae'},
+                              {'label': 'Rap', 'name': 'rap'},
+                              {'label': 'Electronic', 'name': 'electronic'},
+                              {'label': 'World', 'name': 'world'},
+                              {'label': 'Classical', 'name': 'classical'},
+                              {'label': 'Folk', 'name': 'folk'}
+                          ]}])
+    def assign_genre(self, genre):
+        self.song['genre'] = genre

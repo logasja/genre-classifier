@@ -68,7 +68,7 @@ class SongActions(BaseActions):
     # Final action, setting rule
     @rule_action(params=[{'fieldType'   : FIELD_SELECT,
                           'name'        : 'genre',
-                          'label'       : 'Approximate Tempo',
+                          'label'       : 'Genre',
                           'options': [
                               {'label': 'Rock', 'name': 'rock'},
                               {'label': 'Blues', 'name': 'blues'},

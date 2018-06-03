@@ -5,21 +5,17 @@ from business_rules.fields import *
 
 descriptors = ['sharp', 'smooth', 'rough', 'round', 'chaotic', 
                 'patriotic', 'steady', 'hard', 'soft', 'simple',
-                'complex', 'hurried', 'leisurly', 'slow', 'anarchist',
-                'edgy', 'grounded', 'natural', 'grungy', 'upbeat', 'acoustical',
+                'complex', 'hurried', 'leisurly', 'slow',
+                'edgy', 'grounded', 'grungy', 'upbeat', 'acoustical',
                 'homey', 'peppy', 'melodic', 'twangy', 'repetitive', 'bassheavy']
 
-emotions = ['amazed', 'angry', 'annoyed', 'anxious', 'ashamed', 'bitter',
-            'bored', 'comfortable', 'confused', 'content', 'depressed', 'determined',
-            'disdain', 'disgusted', 'eager', 'embarrassed', 'energetic', 'envious',
-            'excited', 'foolish', 'frustrated', 'furious', 'grieving', 'happy', 'hopeful',
-            'hurt', 'inadequate', 'insecure', 'inspired', 'irritated', 'jealous', 'joy', 'lonely',
-            'lost', 'loving', 'miserable', 'motivated', 'nervous', 'overwhelmed', 'peaceful', 'proud',
-            'relieved', 'resentful', 'sad', 'satisfied', 'scared', 'self-conscious', 'shocked', 'silly',
-            'stupid', 'suspicious', 'tense', 'terrified', 'trapped', 'uncomfortable', 'worried', 'worthless']
+emotions = ['amazed', 'angry', 'annoyed', 'anxious', 'bored', 'confused', 'content', 'depressed', 'determined',
+            'energetic', 'happy', 'hurt', 'inspired', 'lost', 'loving', 'peaceful', 'proud', 'tense']
 
-instruments = ['piano', 'lead guitar', 'bass', 'melody guitar', 'saxophone',
-               'drums', 'sythesizer', 'vocals', 'steel guitar', 'fiddle']
+instruments = ['piano', 'lead guitar', 'bass guitar', 'rhythm guitar', 'saxophone',
+               'drums', 'sythesizer', 'vocals', 'steel guitar', 'horns', 'violin']
+
+genres = ['rock', 'blues', 'country', 'reggae', 'rap', 'electronic', 'world', 'classical', 'folk', 'pop']
 
 class SongVariables(BaseVariables):
 
@@ -47,16 +43,19 @@ class SongVariables(BaseVariables):
     def performer_count(self):
         return self.song['performers']
 
+    @numeric_rule_variable(label='Age')
+    def age(self):
+        return self.song['age']
+
+    @select_multiple_rule_variable(options=emotions, label='Percieved Emotion')
+    def perc_emot(self):
+        return self.song['perc_emot']
+
+    @select_multiple_rule_variable(options=emotions, label='Felt Emotion')
+    def felt_emot(self):
+        return self.song['felt_emot']
+
     # Calculated features
-
-    @select_rule_variable(options=['slow', 'medium', 'fast'], label='Approximate Tempo')
-    def tempo(self):
-        return self.song['tempo']
-
-    @boolean_rule_variable(label='Energetic')
-    def energetic(self):
-        return self.song['energetic']
-
     
 
 class SongActions(BaseActions):
@@ -65,20 +64,6 @@ class SongActions(BaseActions):
         self.song = song
 
     # Intermediate actions
-    @rule_action(params=[{'fieldType': FIELD_SELECT,
-                         'name' : 'tempo',
-                         'label': 'Approximate Tempo',
-                         'options': [
-                             {'label': 'Slow', 'name': 'slow'},
-                             {'label': 'Medium', 'name': 'medium'},
-                             {'label': 'Fast', 'name': 'fast'}
-                         ]}])
-    def assign_tempo(self, tempo):
-        self.song['tempo'] = tempo
-
-    @rule_action(params={"energetic": FIELD_NUMERIC})
-    def assign_energetic(self, energetic):
-        self.song['energetic'] = bool(energetic)
 
     # Final action, setting rule
     @rule_action(params=[{'fieldType'   : FIELD_SELECT,
@@ -93,7 +78,8 @@ class SongActions(BaseActions):
                               {'label': 'Electronic', 'name': 'electronic'},
                               {'label': 'World', 'name': 'world'},
                               {'label': 'Classical', 'name': 'classical'},
-                              {'label': 'Folk', 'name': 'folk'}
+                              {'label': 'Folk', 'name': 'folk'},
+                              {'label': 'Pop', 'name': 'pop'}
                           ]}])
     def assign_genre(self, genre):
         self.song['genre'] = genre

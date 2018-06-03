@@ -178,9 +178,8 @@ var conditions, actions, nameField, ageField, occupationField, submit, allData;
                   'input_type': 'text'
               }]
           }
-      }
     };
-  });
+  };
 
   function onReady() {
     conditions = $("#conditions");

@@ -179,9 +179,8 @@ var conditions, actions, nameField, ageField, occupationField, submit, allData;
               }]
           }
       }
-
     };
-  };
+  });
 
   function onReady() {
     conditions = $("#conditions");

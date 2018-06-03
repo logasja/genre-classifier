@@ -128,8 +128,7 @@ var conditions, actions, nameField, ageField, occupationField, submit, allData;
                   'input_type': 'select_multiple'
               }, {
                   'name': 'shares_at_least_one_element_with',
-                  'label': 'Shares
-      At Least One Element With',
+                  'label': 'Shares At Least One Element With',
                   'input_type': 'select_multiple'
               }, {
                   'name': 'shares_exactly_one_element_with',

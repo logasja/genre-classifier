@@ -48,11 +48,9 @@ var conditions, actions, nameField, ageField, occupationField, submit, allData;
         "actions": [{
             "name": "assign_genre",
             "label": "Assign Genre",
-            "params": [{
-                "label": "Genre",
-                "name": "genre",
-                "fieldType": "text"
-            }]
+            "params": {
+                "genre": "text"
+            }
         }],
         "variable_type_operators": {
             "boolean": [{

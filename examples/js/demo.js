@@ -49,40 +49,9 @@ var conditions, actions, nameField, ageField, occupationField, submit, allData;
             'name': 'assign_genre',
             'label': 'Assign Genre',
             'params': [{
-                'fieldType': 'select',
-                'name': 'genre',
                 'label': 'Genre',
-                'options': [{
-                    'label': 'Rock',
-                    'name': 'rock'
-                }, {
-                    'label': 'Blues',
-                    'name': 'blues'
-                }, {
-                    'label': 'Country',
-                    'name': 'country'
-                }, {
-                    'label': 'Reggae',
-                    'name': 'reggae'
-                }, {
-                    'label': 'Rap',
-                    'name': 'rap'
-                }, {
-                    'label': 'Electronic',
-                    'name': 'electronic'
-                }, {
-                    'label': 'World',
-                    'name': 'world'
-                }, {
-                    'label': 'Classical',
-                    'name': 'classical'
-                }, {
-                    'label': 'Folk',
-                    'name': 'folk'
-                }, {
-                    'label': 'Pop',
-                    'name': 'pop'
-                }]
+                'name': 'genre',
+                'fieldType': 'text'
             }]
         }],
         'variable_type_operators': {

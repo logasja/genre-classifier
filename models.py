@@ -66,20 +66,21 @@ class SongActions(BaseActions):
     # Intermediate actions
 
     # Final action, setting rule
-    @rule_action(params={'fieldType'   : FIELD_SELECT,
-                          'name'        : 'genre',
-                          'label'       : 'Genre',
-                          'options': [
-                              {'label': 'Rock', 'name': 'rock'},
-                              {'label': 'Blues', 'name': 'blues'},
-                              {'label': 'Country', 'name': 'country'},
-                              {'label': 'Reggae', 'name': 'reggae'},
-                              {'label': 'Rap', 'name': 'rap'},
-                              {'label': 'Electronic', 'name': 'electronic'},
-                              {'label': 'World', 'name': 'world'},
-                              {'label': 'Classical', 'name': 'classical'},
-                              {'label': 'Folk', 'name': 'folk'},
-                              {'label': 'Pop', 'name': 'pop'}
-                          ]})
+    # @rule_action(params=[{'fieldType'   : FIELD_SELECT,
+    #                       'name'        : 'genre',
+    #                       'label'       : 'Genre',
+    #                       'options': [
+    #                           {'label': 'Rock', 'name': 'rock'},
+    #                           {'label': 'Blues', 'name': 'blues'},
+    #                           {'label': 'Country', 'name': 'country'},
+    #                           {'label': 'Reggae', 'name': 'reggae'},
+    #                           {'label': 'Rap', 'name': 'rap'},
+    #                           {'label': 'Electronic', 'name': 'electronic'},
+    #                           {'label': 'World', 'name': 'world'},
+    #                           {'label': 'Classical', 'name': 'classical'},
+    #                           {'label': 'Folk', 'name': 'folk'},
+    #                           {'label': 'Pop', 'name': 'pop'}
+    #                       ]}])
+    @rule_action(params={'genre': FIELD_TEXT})
     def assign_genre(self, genre):
         self.song['genre'] = genre

@@ -48,11 +48,11 @@ var conditions, actions, nameField, ageField, occupationField, submit, allData;
         'actions': [{
             'name': 'assign_genre',
             'label': 'Assign Genre',
-            'params': [{
+            'params': {
                 'label': 'Genre',
                 'name': 'genre',
                 'fieldType': 'text'
-            }]
+            }
         }],
         'variable_type_operators': {
             'boolean': [{

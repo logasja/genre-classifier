@@ -66,7 +66,7 @@ class SongActions(BaseActions):
     # Intermediate actions
 
     # Final action, setting rule
-    @rule_action(params=[{'fieldType'   : FIELD_SELECT,
+    @rule_action(params={'fieldType'   : FIELD_SELECT,
                           'name'        : 'genre',
                           'label'       : 'Genre',
                           'options': [
@@ -80,6 +80,6 @@ class SongActions(BaseActions):
                               {'label': 'Classical', 'name': 'classical'},
                               {'label': 'Folk', 'name': 'folk'},
                               {'label': 'Pop', 'name': 'pop'}
-                          ]}])
+                          ]})
     def assign_genre(self, genre):
         self.song['genre'] = genre

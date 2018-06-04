@@ -1,43 +1,63 @@
 rules_json = [
-# expiration_days < 5 AND current_inventory > 20
-{ "conditions": { "all": [
-      { "name": "expiration_days",
-        "operator": "less_than",
-        "value": 5,
-      },
-      { "name": "current_inventory",
-        "operator": "greater_than",
-        "value": 20,
-      },
-  ]},
-  "actions": [
-      { "name": "put_on_sale",
-        "params": {"sale_percentage": 0.25},
-      },
-  ],
-},
-
-# current_inventory < 5 OR (current_month = "December" AND current_inventory < 20)
-{ "conditions": { "any": [
-      { "name": "current_inventory",
-        "operator": "less_than",
-        "value": 5,
+  # Rules for punk rock
+  { "conditions": { "all": [
+      {
+          "name": "distorted",
+          "operator": "is_true",
+          "value": ""
+      }, {
+          "name": "perc_emot",
+          "operator": "shares_at_least_one_element_with",
+          "value": ["angry", "anxious", "determined", "energetic", "tense"]
+      }, {
+          "name": "instruments",
+          "operator": "contains_all",
+          "value": ["lead guitar", "bass guitar", "rhythm guitar", "drums", "vocals"]
+      }, {
+          "name": "performer_count",
+          "operator": "less_than_or_equal_to",
+          "value": 5
+      }, {
+          "name": "felt_emot",
+          "operator": "shares_no_elements_with",
+          "value": ["bored", "content", "hurt", "lost", "loving", "peaceful"]
       },
     ]},
-      { "all": [
-        {  "name": "current_month",
-          "operator": "equal_to",
-          "value": "December",
-        },
-        { "name": "current_inventory",
-          "operator": "less_than",
-          "value": 20,
-        }
-      ]},
+    "actions": [
+      {"name":"assign_genre",
+        "params":{"genre":"rock"}
+      },
+    ],
   },
-  "actions": [
-    { "name": "order_more",
-      "params":{"number_to_order": 40},
-    },
-  ],
-}]
+
+  # Rules for classical score
+  { "conditions": {
+      "all": [{
+          "name": "instruments",
+          "operator": "shares_at_least_one_element_with",
+          "value": ["piano", "vocals", "horns", "violin"]
+      }, {
+          "name": "descriptor",
+          "operator": "shares_no_elements_with",
+          "value": ["sharp", "rough", "chaotic", "hard", "simple", "hurried", "edgy", "grungy", "peppy", "twangy", "bassheavy"]
+      }, {
+          "name": "perc_emot",
+          "operator": "shares_at_least_one_element_with",
+          "value": ["angry", "anxious", "content", "happy", "inspired", "lost", "loving", "peaceful"]
+      }, {
+          "name": "felt_emot",
+          "operator": "is_contained_by",
+          "value": ["amazed", "angry", "bored", "content", "depressed", "happy", "inspired", "loving", "peaceful", "proud"]
+      }, {
+          "name": "performer_count",
+          "operator": "greater_than_or_equal_to",
+          "value": 10
+      },
+    ]},
+    "actions": [
+      {"name": "assign_genre",
+       "params": {"genre": "classical"}
+      },
+    ],
+  },
+]

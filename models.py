@@ -27,10 +27,6 @@ class SongVariables(BaseVariables):
     def descriptor(self):
         return self.song['descriptors']
 
-    @select_multiple_rule_variable(options=emotions, label='Emotions')
-    def emotion(self):
-        return self.song['emotions']
-
     @select_multiple_rule_variable(options=instruments, label='Instruments')
     def instruments(self):
         return self.song['instruments']
@@ -60,7 +56,7 @@ class SongVariables(BaseVariables):
 
 class SongActions(BaseActions):
 
-    def __init__(self, product):
+    def __init__(self, song):
         self.song = song
 
     # Intermediate actions

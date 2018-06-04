@@ -31,29 +31,34 @@ rules_json = [
   },
 
   # Rules for classical score
-  { "conditions": {
-      "all": [{
-          "name": "instruments",
-          "operator": "shares_at_least_one_element_with",
-          "value": ["piano", "vocals", "horns", "violin"]
-      }, {
-          "name": "descriptor",
-          "operator": "shares_no_elements_with",
-          "value": ["sharp", "rough", "chaotic", "hard", "simple", "hurried", "edgy", "grungy", "peppy", "twangy", "bassheavy"]
-      }, {
-          "name": "perc_emot",
-          "operator": "shares_at_least_one_element_with",
-          "value": ["angry", "anxious", "content", "happy", "inspired", "lost", "loving", "peaceful"]
-      }, {
-          "name": "felt_emot",
-          "operator": "is_contained_by",
-          "value": ["amazed", "angry", "bored", "content", "depressed", "happy", "inspired", "loving", "peaceful", "proud"]
-      }, {
-          "name": "performer_count",
-          "operator": "greater_than_or_equal_to",
-          "value": 10
-      },
-    ]},
+  { "conditions":  {
+     "all": [
+        {
+            "name": "instruments",
+            "operator": "shares_at_least_one_element_with",
+            "value": ["piano", "vocals", "horns", "violin"]
+        }, {
+            "name": "descriptor",
+            "operator": "shares_no_elements_with",
+            "value": ["sharp", "rough", "chaotic", "hard", "simple", "hurried", "edgy", "grungy", "peppy", "twangy", "bassheavy"]
+        }, {
+            "name": "perc_emot",
+            "operator": "shares_at_least_one_element_with",
+            "value": ["angry", "anxious", "content", "happy", "inspired", "lost", "loving", "peaceful"]
+        }, {
+            "name": "felt_emot",
+            "operator": "is_contained_by",
+            "value": ["amazed", "angry", "bored", "content", "depressed", "happy", "inspired", "loving", "peaceful", "proud"]
+        }, {
+            "name": "performer_count",
+            "operator": "greater_than_or_equal_to",
+            "value": 10
+        }, {
+            "name": "distorted",
+            "operator": "is_false",
+            "value": ""
+        }]
+    },
     "actions": [
       {"name": "assign_genre",
        "params": {"genre": "classical"}

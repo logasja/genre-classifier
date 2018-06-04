@@ -1,13 +1,2 @@
-audioread==2.1.5
 business-rules==1.0.1
 certifi==2018.4.16
-decorator==4.3.0
-joblib==0.11
-librosa==0.6.1
-llvmlite==0.23.0
-numba==0.38.0
-numpy==1.14.3
-resampy==0.2.0
-scikit-learn==0.19.1
-scipy==1.1.0
-six==1.11.0

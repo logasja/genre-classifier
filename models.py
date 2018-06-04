@@ -65,7 +65,7 @@ class SongActions(BaseActions):
 
     # Intermediate actions
  
-    @rule_action(params={"dummy": FIELD_NO_INPUT})
+    @rule_action(params={"dummy": FIELD_TEXT})
     def dummy(self, dummy):
         return
 
@@ -85,5 +85,6 @@ class SongActions(BaseActions):
                               {'label': 'Folk', 'name': 'folk'},
                               {'label': 'Pop', 'name': 'pop'}
                           ]}])
+    # @rule_action(params={"genre": FIELD_TEXT})
     def assign_genre(self, genre):
         self.song['genre'] = genre

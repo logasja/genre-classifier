@@ -1,7 +1,7 @@
 var conditions, actions, nameField, ageField, occupationField, submit, allData;
 (function($) {
   var occupationOptions = [ "Software Engineer", "Biz Dev", "Marketing" ];
-  var json = require('model.json');
+  var json = require('../../model.json');
   function getInitialData() {
     return json;
   };

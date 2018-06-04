@@ -6,7 +6,7 @@ var conditions, actions, nameField, ageField, occupationField, submit, allData;
     $.ajax({
       'async': false,
       'global': false,
-      'url': "../../model.json",
+      'url': "../model.json",
       'dataType': "json",
       'success': function (data) {
         json = data;

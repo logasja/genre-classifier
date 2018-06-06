@@ -32,59 +32,59 @@ class Application(tk.Frame):
     def createWidgets(self):
         # Instrument Select
         inst_title              = ttk.Label(self, text="Instruments")
-        inst_title.pack(side=tk.TOP)
+        inst_title.grid(row=0)
 
         inst_var = tk.StringVar()
         inst_var.set(instruments)
         self.INST               = tk.Listbox(self, listvariable=inst_var, selectmode=tk.MULTIPLE, width=20, height=10)
         self.INST.configure(exportselection=False)
-        self.INST.pack(side=tk.TOP)
+        self.INST.grid(row=1)
         
         # Descriptor Select
         desc_title              = ttk.Label(self, text="Descriptor")
-        desc_title.pack(side=tk.TOP)
+        desc_title.grid(row=2)
 
         desc_var = tk.StringVar()
         desc_var.set(descriptors)
         self.DESCR              = tk.Listbox(self, listvariable=desc_var, selectmode=tk.MULTIPLE, width=20, height=10)
         self.DESCR.configure(exportselection=False)
-        self.DESCR.pack(side=tk.TOP)
+        self.DESCR.grid(row=3)
 
         # Intended Emotion
         intnemot_title          = ttk.Label(self, text="Intended Emotion")
-        intnemot_title.pack(side=tk.TOP)
+        intnemot_title.grid(row=4)
 
         emot_var = tk.StringVar()
         emot_var.set(emotions)
         self.INTNDEMOT          = tk.Listbox(self, listvariable=emot_var, selectmode=tk.MULTIPLE, width=20, height=10)
         self.INTNDEMOT.configure(exportselection=False)
-        self.INTNDEMOT.pack(side=tk.TOP)
+        self.INTNDEMOT.grid(row=5)
 
         # Felt Emotion
         fltemot_title           = ttk.Label(self, text="Felt Emotion")
-        fltemot_title.pack(side=tk.TOP)
+        fltemot_title.grid(row=6)
 
         self.FLTEMOT            = tk.Listbox(self, listvariable=emot_var, selectmode=tk.MULTIPLE, width=20, height=10)
         self.FLTEMOT.configure(exportselection=False)
-        self.FLTEMOT.pack(side=tk.TOP)
+        self.FLTEMOT.grid(row=7)
 
         # Number of Performers
         perfnum_title           = ttk.Label(self, text="Number of Performers")
-        perfnum_title.pack(side=tk.TOP)
+        perfnum_title.grid(row=8)
 
         self.PERFNUM            = tk.Spinbox(self, from_=0, to=20)
-        self.PERFNUM.pack()
+        self.PERFNUM.grid(row=9)
 
         self.INSTBTN            = ttk.Button(self, text="Choices", command=self.get_attribs)
-        self.INSTBTN.pack(side=tk.TOP)
+        self.INSTBTN.grid(row=10)
 
         # Quit button
         self.QUIT               = tk.Button(self, text="QUIT", fg="red", command=self.quit)
-        self.QUIT.pack(side=tk.LEFT)
+        self.QUIT.grid(row=11)
 
         # Run Button
         self.run_rules          = tk.Button(self, text="RUN", command=self.run)
-        self.run_rules.pack(side=tk.LEFT)
+        self.run_rules.grid(row=12)
 
     def __init__(self, song, rules, master=None):
         tk.Frame.__init__(self, master)

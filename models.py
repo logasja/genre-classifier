@@ -5,7 +5,7 @@ from business_rules.fields import *
 
 descriptors = ['sharp', 'smooth', 'rough', 'round', 'chaotic', 
                 'patriotic', 'steady', 'hard', 'soft', 'simple',
-                'complex', 'hurried', 'leisurly', 'slow',
+                'complex', 'hurried', 'leisurly', 'slow', 'distorted',
                 'edgy', 'grounded', 'grungy', 'upbeat', 'acoustical',
                 'homey', 'peppy', 'melodic', 'twangy', 'repetitive', 'bassheavy']
 
@@ -17,6 +17,15 @@ instruments = ['piano', 'lead guitar', 'bass guitar', 'rhythm guitar', 'saxophon
 
 genres = ['rock', 'blues', 'country', 'reggae', 'rap', 'electronic', 'world', 'classical', 'folk', 'pop']
 
+class Song():
+    def __init__(self):
+        self.descriptors    = []
+        self.instruments    = []
+        self.performers     = 0
+        self.perc_emot      = []
+        self.felt_emot      = []
+        self.genre          = None
+
 class SongVariables(BaseVariables):
 
     def __init__(self, song):
@@ -25,31 +34,23 @@ class SongVariables(BaseVariables):
     # Input information
     @select_multiple_rule_variable(options=descriptors, label='Descriptors')
     def descriptor(self):
-        return self.song['descriptors']
+        return self.song.descriptors
 
     @select_multiple_rule_variable(options=instruments, label='Instruments')
     def instruments(self):
-        return self.song['instruments']
-
-    @boolean_rule_variable(label='Distortion')
-    def distorted(self):
-        return self.song['distortion']
+        return self.song.instruments
 
     @numeric_rule_variable(label='Number of Performers')
     def performer_count(self):
-        return self.song['performers']
-
-    @numeric_rule_variable(label='Age')
-    def age(self):
-        return self.song['age']
+        return self.song.performers
 
     @select_multiple_rule_variable(options=emotions, label='Percieved Emotion')
     def perc_emot(self):
-        return self.song['perc_emot']
+        return self.song.perc_emot
 
     @select_multiple_rule_variable(options=emotions, label='Felt Emotion')
     def felt_emot(self):
-        return self.song['felt_emot']
+        return self.song.felt_emot
 
     # Calculated features
     
@@ -83,4 +84,4 @@ class SongActions(BaseActions):
                           ]}])
     # @rule_action(params={"genre": FIELD_TEXT})
     def assign_genre(self, genre):
-        self.song['genre'] = genre
+        self.song.genre = genre

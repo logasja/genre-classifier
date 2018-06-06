@@ -1,39 +1,4 @@
 rules_json = [
-    # Rules for punk rock
-    {
-        "conditions": { 
-            "all": [
-                {
-                    "name": "distorted",
-                    "operator": "is_true",
-                    "value": ""
-                }, {
-                    "name": "perc_emot",
-                    "operator": "shares_at_least_one_element_with",
-                    "value": ["angry", "anxious", "determined", "energetic", "tense"]
-                }, {
-                    "name": "instruments",
-                    "operator": "contains_all",
-                    "value": ["lead guitar", "bass guitar", "rhythm guitar", "drums", "vocals"]
-                }, {
-                    "name": "performer_count",
-                    "operator": "less_than_or_equal_to",
-                    "value": 5
-                }, {
-                    "name": "felt_emot",
-                    "operator": "shares_no_elements_with",
-                    "value": ["bored", "content", "hurt", "lost", "loving", "peaceful"]
-                },
-            ]
-        },
-        "actions": [
-            {
-                "name":"assign_genre",
-                "params":{"genre":"rock"}
-            },
-        ],
-    },
-
     # Rules for classical score
     { 
         "conditions":  {
@@ -58,10 +23,6 @@ rules_json = [
                     "name": "performer_count",
                     "operator": "greater_than_or_equal_to",
                     "value": 10
-                }, {
-                    "name": "distorted",
-                    "operator": "is_false",
-                    "value": ""
                 }
             ]
         },
@@ -80,7 +41,7 @@ rules_json = [
                 {
                     "name": "descriptor",
                     "operator": "shares_at_least_one_element_with",
-                    "value": ["sharp", "rough", "chaotic", "steady", "hard", "hurried", "edgy", "grungy"]
+                    "value": ["sharp", "rough", "chaotic", "steady", "hard", "hurried", "edgy", "grungy", "distorted"]
                 }, {
                     "name": "instruments",
                     "operator": "contains_all",
@@ -240,18 +201,6 @@ rules_json = [
                     "operator": "contains_all",
                     "value": ["drums", "vocals"]
                 }, {
-                    "any": [
-                        {
-                            "name": "age",
-                            "operator": "less_than_or_equal_to",
-                            "value": 50
-                        }, {
-                            "name": "felt_emot",
-                            "operator": "contains_all",
-                            "value": ["annoyed"]
-                        }
-                    ]
-                }, {
                     "name": "performer_count",
                     "operator": "less_than_or_equal_to",
                     "value": 5
@@ -276,7 +225,7 @@ rules_json = [
                 {
                     "name": "descriptor",
                     "operator": "contains_all",
-                    "value": ["upbeat"]
+                    "value": ["upbeat", "distorted"]
                 }, {
                     "name": "descriptor",
                     "operator": "shares_at_least_one_element_with",
@@ -289,16 +238,6 @@ rules_json = [
                     "name": "perc_emot",
                     "operator": "shares_at_least_one_element_with",
                     "value": ["amazed", "anxious", "determined", "happy", "inspired", "tense"]
-                }, {
-                    "any": [{
-                        "name": "age",
-                        "operator": "less_than_or_equal_to",
-                        "value": 50
-                    }, {
-                        "name": "felt_emot",
-                        "operator": "contains_all",
-                        "value": ["annoyed"]
-                    }]
                 }, {
                     "name": "instruments",
                     "operator": "contains_all",
@@ -372,20 +311,6 @@ rules_json = [
                     "operator": "shares_at_least_one_element_with",
                     "value": ["amazed", "anxious", "depressed", "happy", "inspired", "tense"]
                 }, {
-                    "name": "distorted",
-                    "operator": "is_false",
-                    "value": ""
-                }, {
-                    "any": [{
-                        "name": "age",
-                        "operator": "greater_than_or_equal_to",
-                        "value": 30
-                    }, {
-                        "name": "felt_emot",
-                        "operator": "shares_at_least_one_element_with",
-                        "value": ["annoyed", "bored", "confused"]
-                    }]
-                }, {
                     "name": "instruments",
                     "operator": "contains_all",
                     "value": ["drums", "horns", "violin"]
@@ -414,10 +339,6 @@ rules_json = [
                     "name": "descriptor",
                     "operator": "shares_at_least_one_element_with",
                     "value": ["soft", "leisurly", "grounded", "acoustical", "homey", "melodic"]
-                }, {
-                    "name": "distorted",
-                    "operator": "is_false",
-                    "value": ""
                 }, {
                     "name": "perc_emot",
                     "operator": "shares_at_least_one_element_with",

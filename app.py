@@ -28,63 +28,74 @@ class Application(tk.Frame):
             defined_actions=SongActions(self.song),
             stop_on_first_trigger=False
             )
+        self.genre_var.set(self.song.genre)
+        self.update_idletasks()
 
     def createWidgets(self):
         # Instrument Select
         inst_title              = ttk.Label(self, text="Instruments")
-        inst_title.grid(row=0)
+        inst_title.grid(row=0, column=0)
 
         inst_var = tk.StringVar()
+        instruments.sort()
         inst_var.set(instruments)
         self.INST               = tk.Listbox(self, listvariable=inst_var, selectmode=tk.MULTIPLE, width=20, height=10)
         self.INST.configure(exportselection=False)
-        self.INST.grid(row=1)
+        self.INST.grid(row=1, column=0)
         
         # Descriptor Select
         desc_title              = ttk.Label(self, text="Descriptor")
-        desc_title.grid(row=2)
+        desc_title.grid(row=0, column=1)
 
         desc_var = tk.StringVar()
+        descriptors.sort()
         desc_var.set(descriptors)
         self.DESCR              = tk.Listbox(self, listvariable=desc_var, selectmode=tk.MULTIPLE, width=20, height=10)
         self.DESCR.configure(exportselection=False)
-        self.DESCR.grid(row=3)
+        self.DESCR.grid(row=1, column=1)
 
         # Intended Emotion
         intnemot_title          = ttk.Label(self, text="Intended Emotion")
-        intnemot_title.grid(row=4)
+        intnemot_title.grid(row=0, column=2)
 
         emot_var = tk.StringVar()
         emot_var.set(emotions)
         self.INTNDEMOT          = tk.Listbox(self, listvariable=emot_var, selectmode=tk.MULTIPLE, width=20, height=10)
         self.INTNDEMOT.configure(exportselection=False)
-        self.INTNDEMOT.grid(row=5)
+        self.INTNDEMOT.grid(row=1, column=2)
 
         # Felt Emotion
         fltemot_title           = ttk.Label(self, text="Felt Emotion")
-        fltemot_title.grid(row=6)
+        fltemot_title.grid(row=0, column=3)
 
         self.FLTEMOT            = tk.Listbox(self, listvariable=emot_var, selectmode=tk.MULTIPLE, width=20, height=10)
         self.FLTEMOT.configure(exportselection=False)
-        self.FLTEMOT.grid(row=7)
+        self.FLTEMOT.grid(row=1, column=3)
 
         # Number of Performers
         perfnum_title           = ttk.Label(self, text="Number of Performers")
-        perfnum_title.grid(row=8)
+        perfnum_title.grid(row=2, column=0)
 
         self.PERFNUM            = tk.Spinbox(self, from_=0, to=20)
-        self.PERFNUM.grid(row=9)
+        self.PERFNUM.grid(row=2, column=1)
 
-        self.INSTBTN            = ttk.Button(self, text="Choices", command=self.get_attribs)
-        self.INSTBTN.grid(row=10)
+        INSTBTN            = ttk.Button(self, text="Choices", command=self.get_attribs)
+        INSTBTN.grid(row=3, column=0)
 
         # Quit button
-        self.QUIT               = tk.Button(self, text="QUIT", fg="red", command=self.quit)
-        self.QUIT.grid(row=11)
+        QUIT               = tk.Button(self, text="QUIT", fg="red", command=self.quit)
+        QUIT.grid(row=3, column=1)
 
         # Run Button
-        self.run_rules          = tk.Button(self, text="RUN", command=self.run)
-        self.run_rules.grid(row=12)
+        run_rules          = tk.Button(self, text="RUN", command=self.run)
+        run_rules.grid(row=3, column=2)
+
+        # Result Text
+        self.genre_var = tk.StringVar()
+        self.genre_var.set('Not Run Yet')
+        Result              = ttk.Label(self, textvariable=self.genre_var)
+        Result.grid(row=3, column=3)
+        
 
     def __init__(self, song, rules, master=None):
         tk.Frame.__init__(self, master)

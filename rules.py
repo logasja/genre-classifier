@@ -54,8 +54,6 @@ rules_json = [
                     "name": "perc_emot",
                     "operator": "shares_at_least_one_element_with",
                     "value": ["angry", "determined", "energetic", "tense"]
-                }, {
-                    "any": []
                 }
             ]
         },

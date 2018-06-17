@@ -13,18 +13,18 @@ emotions = ['amazed', 'angry', 'annoyed', 'anxious', 'bored', 'confused', 'conte
             'energetic', 'happy', 'hurt', 'inspired', 'lost', 'loving', 'peaceful', 'proud', 'tense']
 
 instruments = ['piano', 'lead guitar', 'bass guitar', 'rhythm guitar', 'saxophone',
-               'drums', 'sythesizer', 'vocals', 'steel guitar', 'horns', 'violin']
+               'drums', 'synthesizer', 'vocals', 'steel guitar', 'horns', 'violin']
 
 genres = ['rock', 'blues', 'country', 'reggae', 'rap', 'electronic', 'world', 'classical', 'folk', 'pop']
 
 class Song():
-    def __init__(self):
-        self.descriptors    = []
-        self.instruments    = []
-        self.performers     = 0
-        self.perc_emot      = []
-        self.felt_emot      = []
-        self.genre          = None
+    def __init__(self, descriptors=[], instruments=[], performers=0, perc_emot=[], felt_emot=[], genre=None):
+        self.descriptors    = descriptors
+        self.instruments    = instruments
+        self.performers     = performers
+        self.perc_emot      = perc_emot
+        self.felt_emot      = felt_emot
+        self.genre          = genre
 
 class SongVariables(BaseVariables):
 

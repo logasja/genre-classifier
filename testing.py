@@ -357,13 +357,13 @@ if __name__ == '__main__':
     genre_list = {}
     incorrect_list = []
     for song in song_list:
-        genre_list[song] = song.genre
+        genre_list[song] = song_list[song].genre
         run_all(rule_list=self.rules, #FIX where rules list comes from
             defined_variables=SongVariables(song_list[song]),
             defined_actions=SongActions(song_list[song]),
             stop_on_first_trigger=False
             )
-        if song.genre != genre_list[song]:
+        if song_list[song].genre != genre_list[song]:
             incorrect_list.append(song)
     print(incorrect_list)
-    print("Number incorrect: %n") % (length(incorrect_list), )
+    print("Number correct: %n / 50") % (50 - length(incorrect_list), )

@@ -3,11 +3,13 @@ from business_rules.variables import *
 from business_rules.actions import BaseActions, rule_action
 from business_rules.fields import *
 
-descriptors = ['sharp', 'smooth', 'rough', 'round', 'chaotic', 
-                'patriotic', 'steady', 'hard', 'soft', 'simple',
+descriptors = ['sharp', 'smooth', 'rough', 'round', 'chaotic', 'simple', 'energetic',
+                'patriotic', 'steady', 'hard', 'soft', 'simple', 'honest',
                 'complex', 'hurried', 'leisurly', 'slow', 'distorted',
                 'edgy', 'grounded', 'grungy', 'upbeat', 'acoustical',
-                'homey', 'peppy', 'melodic', 'twangy', 'repetitive', 'bassheavy']
+                'homey', 'peppy', 'melodic', 'twangy', 'repetitive', 'bassheavy',
+                'awsome', 'epic', 'flowing', 'surprising', 'full', 'beautiful', 'ambient',
+                'catchy', 'multilingual', 'deep', 'sophisticated', 'complex', 'fun', 'fulfilling']
 
 emotions = ['amazed', 'angry', 'annoyed', 'anxious', 'bored', 'confused', 'content', 'depressed', 'determined',
             'energetic', 'happy', 'hurt', 'inspired', 'lost', 'loving', 'peaceful', 'proud', 'tense']
@@ -62,6 +64,32 @@ class SongActions(BaseActions):
 
     # Intermediate actions
  
+    @rule_action(params=[{'fieldType'  : FIELD_SELECT_MULTIPLE,
+                          'name'       : 'emotion',
+                          'label'      : 'Emotion',
+                          'options': [
+                              {'label': 'Amazed', 'name': 'amazed'},
+                              {'label': 'Angry', 'name': 'angry'},
+                              {'label': 'Annoyed', 'name': 'annoyed'},
+                              {'label': 'Anxious', 'name': 'anxious'},
+                              {'label': 'Bored', 'name': 'bored'},
+                              {'label': 'Confused', 'name': 'confused'},
+                              {'label': 'Content', 'name': 'content'},
+                              {'label': 'Depressed', 'name': 'depressed'},
+                              {'label': 'Determined', 'name': 'determined'},
+                              {'label': 'Energetic', 'name': 'energetic'},
+                              {'label': 'Happy', 'name': 'happy'},
+                              {'label': 'Hurt', 'name': 'hurt'},
+                              {'label': 'Inspired', 'name': 'inspired'},
+                              {'label': 'Lost', 'name': 'lost'},
+                              {'label': 'Loving', 'name': 'loving'},
+                              {'label': 'Peaceful', 'name': 'peaceful'},
+                              {'label': 'Proud', 'name': 'proud'},
+                              {'label': 'Tense', 'name': 'tense'}
+                          ]}])
+    def add_emotion(self, emotion):
+        self.song.felt_emot = emotion
+
     @rule_action(params={"dummy": FIELD_TEXT})
     def dummy(self, dummy):
         return

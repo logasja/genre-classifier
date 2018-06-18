@@ -17,9 +17,6 @@ class SongTests(unittest.TestCase):
                 defined_variables=SongVariables(song),
                 defined_actions=SongActions(song),
                 stop_on_first_trigger=False)
-        
-        self.assertEqual(true_genre, song.genre, 
-                         song_list[0]['title'] + " misclassified as " + song.genre + " (true: " + true_genre + ")\n")
 
     def test_case_1(self):
         song = song_list[1]['song']
@@ -29,9 +26,6 @@ class SongTests(unittest.TestCase):
                 defined_actions=SongActions(song),
                 stop_on_first_trigger=False)
         
-        self.assertEqual(true_genre, song.genre, 
-                         song_list[1]['title'] + " misclassified as " + song.genre + " (true: " + true_genre + ")\n")
-
     def test_case_3(self):
         song = song_list[3]['song']
         true_genre = song.genre
@@ -39,9 +33,6 @@ class SongTests(unittest.TestCase):
                 defined_variables=SongVariables(song),
                 defined_actions=SongActions(song),
                 stop_on_first_trigger=False)
-        
-        self.assertEqual(true_genre, song.genre, 
-                         song_list[3]['title'] + " misclassified as " + song.genre + " (true: " + true_genre + ")\n")
 
     def test_case_4(self):
         song = song_list[4]['song']
@@ -50,9 +41,6 @@ class SongTests(unittest.TestCase):
                 defined_variables=SongVariables(song),
                 defined_actions=SongActions(song),
                 stop_on_first_trigger=False)
-        
-        self.assertEqual(true_genre, song.genre, 
-                         song_list[4]['title'] + " misclassified as " + song.genre + " (true: " + true_genre + ")\n")
 
     def test_case_5(self):
         song = song_list[5]['song']
@@ -61,9 +49,6 @@ class SongTests(unittest.TestCase):
                 defined_variables=SongVariables(song),
                 defined_actions=SongActions(song),
                 stop_on_first_trigger=False)
-        
-        self.assertEqual(true_genre, song.genre, 
-                         song_list[5]['title'] + " misclassified as " + song.genre + " (true: " + true_genre + ")\n")
 
     def test_case_6_to_25(self):
         for i in range(6, 26):
@@ -73,8 +58,6 @@ class SongTests(unittest.TestCase):
                     defined_variables=SongVariables(song),
                     defined_actions=SongActions(song),
                     stop_on_first_trigger=False)
-            self.assertEqual(true_genre, song.genre, 
-                            song_list[i]['title'] + " misclassified as " + song.genre + " (true: " + true_genre + ")\n")
 
     def test_case_26_to_50(self):
         for i in range(26, 50):
@@ -84,10 +67,12 @@ class SongTests(unittest.TestCase):
                     defined_variables=SongVariables(song),
                     defined_actions=SongActions(song),
                     stop_on_first_trigger=False)
-            self.assertEqual(true_genre, song.genre, 
-                            song_list[i]['title'] + " misclassified as " + song.genre + " (true: " + true_genre + ")\n")
 
 
+from pandas import DataFrame
+from pandas_ml import ConfusionMatrix
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 class ModelAccuracyTest(unittest.TestCase):
     def setUp(self):
@@ -96,6 +81,7 @@ class ModelAccuracyTest(unittest.TestCase):
     def test_accuracy(self):
         total = 50
         correct = 0
+        df = DataFrame(index=range(0,50), columns=['true', 'predict'])
         for i in range(0,50):
             song = song_list[i]['song']
             true_genre = song.genre
@@ -103,13 +89,32 @@ class ModelAccuracyTest(unittest.TestCase):
                     defined_variables=SongVariables(song),
                     defined_actions=SongActions(song),
                     stop_on_first_trigger=False)
+            df.loc[i] = [true_genre, song.genre]
             if true_genre == song.genre:
                 correct += 1
         print(correct/total)
+        cnf_matrix = ConfusionMatrix(df['true'], df['predict'])
+        cnf_matrix.plot()
+        plt.show()
         self.assertGreater((correct/total), 0.5)
 
+    def confusion_matrix(self):
+        df = DataFrame(index=range(0,50), columns=['true', 'predict'])
+        for i in range(0, 50):
+            song = song_list[i]['song']
+            true_genre = str(song.genre)
+            run_all(rule_list=self.rules,
+                    defined_variables=SongVariables(song),
+                    defined_actions=SongActions(song),
+                    stop_on_first_trigger=False)
+            df.loc[i] = [true_genre, song.genre]
+        cnf_matrix = ConfusionMatrix(df['true'], df['predict'])
+        cnf_matrix.plot()
+        plt.show()
+            
+
 if __name__ == '__main__':
-    song_tests = unittest.TestLoader().loadTestsFromTestCase(SongTests)
-    unittest.TextTestRunner(verbosity=1).run(song_tests)
     accuracy_tests = unittest.TestLoader().loadTestsFromTestCase(ModelAccuracyTest)
     unittest.TextTestRunner(verbosity=1).run(accuracy_tests)
+    song_tests = unittest.TestLoader().loadTestsFromTestCase(SongTests)
+    unittest.TextTestRunner(verbosity=1).run(song_tests)

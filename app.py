@@ -79,9 +79,6 @@ class Application(tk.Frame):
         self.PERFNUM            = tk.Spinbox(self, from_=0, to=20)
         self.PERFNUM.grid(row=2, column=1)
 
-        INSTBTN            = ttk.Button(self, text="Choices", command=self.get_attribs)
-        INSTBTN.grid(row=3, column=0)
-
         # Quit button
         QUIT               = tk.Button(self, text="QUIT", fg="red", command=self.quit)
         QUIT.grid(row=3, column=1)
